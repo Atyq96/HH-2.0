@@ -8,7 +8,7 @@ const Nav = () => {
         <div className="flex   ">
           <a href="/">
             <img
-              src="../public/Logo-HH.svg"
+              src="../public/vite.svg"
               alt="logo"
               width={50}
               height={50}
