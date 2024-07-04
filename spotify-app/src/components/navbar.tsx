@@ -8,13 +8,13 @@ const Nav = () => {
         <div className="flex   ">
           <a href="/">
             <img
-              src="../public/vite.svg"
+              src="public/Logo-HH.svg"
               alt="logo"
               width={50}
               height={50}
               className="ml-5"
             />
-            <label className=" font-bold">Harmony Hub</label>
+            <label className="font-bold">Harmony Hub</label>
           </a>
         </div>
 
