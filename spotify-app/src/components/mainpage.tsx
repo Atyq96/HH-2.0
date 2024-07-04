@@ -6,7 +6,7 @@ const spotifyApi = new SpotifyWebApi();
 const MainPage: React.FC = () => {
   const [topTracks, setTopTracks] = useState<SpotifyApi.TrackObjectFull[]>([]);
   const [recommendations, setRecommendations] = useState<
-    SpotifyApi.TrackObjectFull[]
+    SpotifyApi.TrackObjectSimplified[]
   >([]);
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("spotifyAccessToken")
@@ -149,15 +149,7 @@ const MainPage: React.FC = () => {
               <ul className="space-y-4">
                 {recommendations.map((track) => (
                   <li key={track.id} className="flex items-center space-x-4">
-                    {track.album &&
-                      track.album.images &&
-                      track.album.images.length > 0 && (
-                        <img
-                          src={track.album.images[0].url}
-                          alt={track.name}
-                          className="w-16 h-16 rounded"
-                        />
-                      )}
+                    
                     <span className="flex-1">{track.name}</span>
                     <a
                       href={track.external_urls.spotify}
