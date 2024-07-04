@@ -168,9 +168,7 @@ const MainPage: React.FC = () => {
           )}
         </main>
       )}
-      <footer className="mt-8">
-        <p className="text-gray-600">Footer content here</p>
-      </footer>
+      
     </div>
   );
 };
