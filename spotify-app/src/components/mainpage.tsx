@@ -6,7 +6,7 @@ const spotifyApi = new SpotifyWebApi();
 const MainPage: React.FC = () => {
   const [topTracks, setTopTracks] = useState<SpotifyApi.TrackObjectFull[]>([]);
   const [recommendations, setRecommendations] = useState<
-    SpotifyApi.TrackObjectSimplified[]
+    SpotifyApi.TrackObjectFull[]
   >([]);
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("spotifyAccessToken")
@@ -82,27 +82,33 @@ const MainPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-4">
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold mb-4">My Spotify App</h1>
+    <div className="flex flex-col items-center p-32">
+      <div className="flex flex-col gap-5 rounded-lg  justify-center items-center">
+        <h1 className="font-bold text-[50px] text-center">
+          Welcome to Harmony Hub
+        </h1>
+        <p className="text-md ml-2 mr-2">
+          Your Personalized Soundtrack Awaits! Dive into a world of music
+          perfectly curated from your Spotify favorites.
+        </p>
         {!token ? (
           <button
             onClick={handleLogin}
-            className="px-4 py-2 bg-green-500 text-white rounded-lg"
+            className=" bg-green-500 text-white rounded-lg p-2 w-32 "
           >
-            Login with Spotify
+            Get Started
           </button>
         ) : (
           <button
             onClick={handleLogout}
-            className="px-4 py-2 bg-red-500 text-white rounded-lg"
+            className=" bg-red-500 text-white rounded-lg p-2 w-32"
           >
             Logout
           </button>
         )}
-      </header>
+      </div>
       {token && (
-        <main className="w-full max-w-xl">
+        <main className="w-full flex gap-20 p-10 justify-center ">
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Top Tracks</h2>
             <ul className="space-y-4">
@@ -143,6 +149,15 @@ const MainPage: React.FC = () => {
               <ul className="space-y-4">
                 {recommendations.map((track) => (
                   <li key={track.id} className="flex items-center space-x-4">
+                    {track.album &&
+                      track.album.images &&
+                      track.album.images.length > 0 && (
+                        <img
+                          src={track.album.images[0].url}
+                          alt={track.name}
+                          className="w-16 h-16 rounded"
+                        />
+                      )}
                     <span className="flex-1">{track.name}</span>
                     <a
                       href={track.external_urls.spotify}
