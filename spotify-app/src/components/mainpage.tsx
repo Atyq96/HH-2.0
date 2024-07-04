@@ -5,11 +5,9 @@ const spotifyApi = new SpotifyWebApi();
 
 const MainPage: React.FC = () => {
   const [topTracks, setTopTracks] = useState<SpotifyApi.TrackObjectFull[]>([]);
- const [recommendations, setRecommendations] = useState<
-   SpotifyApi.TrackObjectFull[]
- >([]);
-
-
+  const [recommendations, setRecommendations] = useState<
+    SpotifyApi.TrackObjectSimplified[]
+  >([]);
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("spotifyAccessToken")
   );
@@ -50,23 +48,22 @@ const MainPage: React.FC = () => {
     }
   }, [token]);
 
- const fetchRecommendations = async () => {
-   try {
-     const seedTracks = topTracks.map((track) => track.id).slice(0, 5);
-     const response = await spotifyApi.getRecommendations({
-       seed_tracks: seedTracks,
-       limit: 5,
-     });
-     setRecommendations(response.tracks);
-   } catch (error) {
-     console.error("Error fetching recommendations:", error);
-   }
- };
-
+  const fetchRecommendations = async () => {
+    try {
+      const seedTracks = topTracks.map((track) => track.id).slice(0, 5);
+      const response = await spotifyApi.getRecommendations({
+        seed_tracks: seedTracks,
+        limit: 5,
+      });
+      setRecommendations(response.tracks);
+    } catch (error) {
+      console.error("Error fetching recommendations:", error);
+    }
+  };
 
   const handleLogin = () => {
-    const clientId = 'f697bc8bf37d4b62aa9c1c2245a97e42'; // Your actual Client ID
-    const redirectUri = "https://hh-2-0-fth8.vercel.app/"; // Your local URL or production URL
+    const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID; // Your actual Client ID
+    const redirectUri = import.meta.env.VITE_SPOTIFY_REDIRECT_URI; // Your local URL or production URL
     const scopes = ["user-top-read", "user-read-recently-played"];
 
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(
@@ -85,33 +82,27 @@ const MainPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-32">
-      <div className="flex flex-col gap-5 rounded-lg  justify-center items-center">
-        <h1 className="font-bold text-[50px] text-center">
-          Welcome to Harmony Hub
-        </h1>
-        <p className="text-md ml-2 mr-2">
-          Your Personalized Soundtrack Awaits! Dive into a world of music
-          perfectly curated from your Spotify favorites.
-        </p>
+    <div className="flex flex-col items-center p-4">
+      <header className="mb-8">
+        <h1 className="text-3xl font-bold mb-4">My Spotify App</h1>
         {!token ? (
           <button
             onClick={handleLogin}
-            className=" bg-green-500 text-white rounded-lg p-2 w-32 "
+            className="px-4 py-2 bg-green-500 text-white rounded-lg"
           >
-            Get Started
+            Login with Spotify
           </button>
         ) : (
           <button
             onClick={handleLogout}
-            className=" bg-red-500 text-white rounded-lg p-2 w-32"
+            className="px-4 py-2 bg-red-500 text-white rounded-lg"
           >
             Logout
           </button>
         )}
-      </div>
+      </header>
       {token && (
-        <main className="w-full flex gap-20 p-10 justify-center ">
+        <main className="w-full max-w-xl">
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">Top Tracks</h2>
             <ul className="space-y-4">
@@ -152,15 +143,6 @@ const MainPage: React.FC = () => {
               <ul className="space-y-4">
                 {recommendations.map((track) => (
                   <li key={track.id} className="flex items-center space-x-4">
-                    {track.album &&
-                      track.album.images &&
-                      track.album.images.length > 0 && (
-                        <img
-                          src={track.album.images[0].url}
-                          alt={track.name}
-                          className="w-16 h-16 rounded"
-                        />
-                      )}
                     <span className="flex-1">{track.name}</span>
                     <a
                       href={track.external_urls.spotify}
