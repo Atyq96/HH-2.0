@@ -6,7 +6,7 @@ const spotifyApi = new SpotifyWebApi();
 const MainPage: React.FC = () => {
   const [topTracks, setTopTracks] = useState<SpotifyApi.TrackObjectFull[]>([]);
   const [recommendations, setRecommendations] = useState<
-    SpotifyApi.TrackObjectSimplified[]
+    SpotifyApi.TrackObjectFull[]
   >([]);
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("spotifyAccessToken")
@@ -55,15 +55,21 @@ const MainPage: React.FC = () => {
         seed_tracks: seedTracks,
         limit: 5,
       });
-      setRecommendations(response.tracks);
+
+      // Fetch detailed track information
+      const detailedTracks = await Promise.all(
+        response.tracks.map((track) => spotifyApi.getTrack(track.id))
+      );
+
+      setRecommendations(detailedTracks);
     } catch (error) {
       console.error("Error fetching recommendations:", error);
     }
   };
 
   const handleLogin = () => {
-    const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID; // Your actual Client ID
-    const redirectUri = import.meta.env.VITE_SPOTIFY_REDIRECT_URI; // Your local URL or production URL
+    const clientId = "f697bc8bf37d4b62aa9c1c2245a97e42"; // Your actual Client ID
+    const redirectUri = "https://hh-2-0-fth8.vercel.app/"; // Your local URL or production URL
     const scopes = ["user-top-read", "user-read-recently-played"];
 
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(
@@ -114,11 +120,13 @@ const MainPage: React.FC = () => {
             <ul className="space-y-4">
               {topTracks.map((track) => (
                 <li key={track.id} className="flex items-center space-x-4">
-                  <img
-                    src={track.album.images[0].url}
-                    alt={track.name}
-                    className="w-16 h-16 rounded"
-                  />
+                  {track.album && track.album.images[0] && (
+                    <img
+                      src={track.album.images[0].url}
+                      alt={track.name}
+                      className="w-16 h-16 rounded"
+                    />
+                  )}
                   <span className="flex-1">{track.name}</span>
                   <a
                     href={track.external_urls.spotify}
@@ -149,7 +157,13 @@ const MainPage: React.FC = () => {
               <ul className="space-y-4">
                 {recommendations.map((track) => (
                   <li key={track.id} className="flex items-center space-x-4">
-                    
+                    {track.album && track.album.images[0] && (
+                      <img
+                        src={track.album.images[0].url}
+                        alt={track.name}
+                        className="w-16 h-16 rounded"
+                      />
+                    )}
                     <span className="flex-1">{track.name}</span>
                     <a
                       href={track.external_urls.spotify}
