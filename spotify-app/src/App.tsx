@@ -1,17 +1,23 @@
 // src/App.tsx
-
 import React from "react";
-import MainPage from "./components/mainpage";
-import Nav from "./components/navbar";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Footer from "./components/footer";
+import Nav from "./components/navbar";
+import About from "./components/about";
+import MainPage from "./components/mainpage";
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <Nav />
-      <MainPage />
-      <Footer />
-    </div>
+    <Router>
+      <div className="flex flex-col min-h-screen">
+        <Nav />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 };
 

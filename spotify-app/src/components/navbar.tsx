@@ -1,7 +1,7 @@
 
 
 const Nav = () => {
-    const navLists = ["Home", "About", "Contact Us"];
+    const navLists = ["Home", "About",];
     return (
     <header className=" bg-black text-white w-full py-2 sm:px-10 flex justify-between items-center">
       <nav className="flex  w-full  gap-[60%]">
