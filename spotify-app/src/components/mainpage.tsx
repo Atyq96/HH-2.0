@@ -6,8 +6,9 @@ const spotifyApi = new SpotifyWebApi();
 const MainPage: React.FC = () => {
   const [topTracks, setTopTracks] = useState<SpotifyApi.TrackObjectFull[]>([]);
   const [recommendations, setRecommendations] = useState<
-    SpotifyApi.TrackObjectSimplified[]
+    SpotifyApi.TrackObjectFull[]
   >([]);
+
   const [token, setToken] = useState<string | null>(
     localStorage.getItem("spotifyAccessToken")
   );
@@ -48,18 +49,19 @@ const MainPage: React.FC = () => {
     }
   }, [token]);
 
-  const fetchRecommendations = async () => {
-    try {
-      const seedTracks = topTracks.map((track) => track.id).slice(0, 5);
-      const response = await spotifyApi.getRecommendations({
-        seed_tracks: seedTracks,
-        limit: 5,
-      });
-      setRecommendations(response.tracks);
-    } catch (error) {
-      console.error("Error fetching recommendations:", error);
-    }
-  };
+ const fetchRecommendations = async () => {
+   try {
+     const seedTracks = topTracks.map((track) => track.id).slice(0, 5);
+     const response = await spotifyApi.getRecommendations({
+       seed_tracks: seedTracks,
+       limit: 5,
+     });
+     setRecommendations(response.tracks);
+   } catch (error) {
+     console.error("Error fetching recommendations:", error);
+   }
+ };
+
 
   const handleLogin = () => {
     const clientId = 'f697bc8bf37d4b62aa9c1c2245a97e42'; // Your actual Client ID
