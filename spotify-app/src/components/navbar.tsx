@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import  { useState, useEffect, useRef } from "react";
 import { FaBars } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 
