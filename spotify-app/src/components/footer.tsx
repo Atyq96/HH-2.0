@@ -1,22 +1,21 @@
-
 import { FaXTwitter } from "react-icons/fa6";
 import { FaInstagram, FaFacebookF } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div className="flex flex-col mt-8 bg-[#121212] justify-center items-center pt-10  px-10 gap-20">
-      <div className="flex justify-between w-full items-stretch">
-        <div className="flex items-start flex-1">
+    <div className="flex flex-col mt-8 bg-[#121212] justify-center items-center pt-10 px-4 sm:px-10 gap-10 sm:gap-20">
+      <div className="flex flex-col sm:flex-row justify-between w-full items-stretch gap-6 sm:gap-0">
+        <div className="flex justify-center sm:justify-start items-center flex-1">
           <img src="/Logo-HH.svg" alt="Logo" className="h-10 w-10" />
         </div>
 
         <div className="flex flex-col items-center gap-2 flex-1">
           <h3 className="text-white text-lg font-semibold">Navigation</h3>
           <div className="flex flex-col gap-2">
-            <a href="#" className="text-white hover:underline">
+            <a href="/" className="text-white hover:underline">
               Home
             </a>
-            <a href="#" className="text-white hover:underline">
+            <a href="/about" className="text-white hover:underline">
               About
             </a>
             <a href="#" className="text-white hover:underline">
@@ -31,7 +30,7 @@ const Footer = () => {
           <h4>Ayoub Abouchadi</h4>
         </div>
 
-        <div className="flex items-start space-x-4 flex-1 justify-end">
+        <div className="flex justify-center sm:justify-end items-center space-x-4 flex-1">
           <a
             href="https://facebook.com"
             target="_blank"

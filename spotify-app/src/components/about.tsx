@@ -4,9 +4,9 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const About: React.FC = () => {
   return (
-    <div className="flex flex-col items-center p-20">
-      <h1 className="text-3xl font-bold mb-4">About HarmonyHub</h1>
-      <p className="mb-8 text-center">
+    <div className="flex flex-col items-center px-5 py-20">
+      <h1 className="text-3xl text-start font-bold mb-4 sm:text-center">About HarmonyHub</h1>
+      <p className="mb-8 sm:text-center sm:text-[40px] text-[18px]">
         HarmonyHub is a school project designed to provide personalized music
         recommendations to Spotify users. By analyzing users' top tracks, the
         app suggests new songs that match their taste. Users can log in with

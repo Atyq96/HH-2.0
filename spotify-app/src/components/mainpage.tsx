@@ -88,12 +88,12 @@ const MainPage: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-32">
+    <div className="flex flex-col items-center sm:p-32 px-10 py-32 justify-center">
       <div className="flex flex-col gap-5 rounded-lg  justify-center items-center">
-        <h1 className="font-bold text-[50px] text-center">
+        <h1 className="font-bold text-[18px] sm:text-[50px] text-center">
           Welcome to Harmony Hub
         </h1>
-        <p className="text-md ml-2 mr-2">
+        <p className="text-[18px] text-center w-full sm:text-md ml-2 mr-2">
           Your Personalized Soundtrack Awaits! Dive into a world of music
           perfectly curated from your Spotify favorites.
         </p>
