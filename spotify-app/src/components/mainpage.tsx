@@ -114,8 +114,8 @@ const MainPage: React.FC = () => {
         )}
       </div>
       {token && (
-        <main className="w-full flex gap-20 p-10 justify-center ">
-          <section className="mb-8">
+        <main className="w-full flex flex-col sm:flex-row gap-10 p-5 justify-center">
+          <section className="w-full sm:w-1/2 mb-8">
             <h2 className="text-2xl font-semibold mb-4">Top Tracks</h2>
             <ul className="space-y-4">
               {topTracks.map((track) => (
@@ -152,7 +152,7 @@ const MainPage: React.FC = () => {
             )}
           </section>
           {recommendations.length > 0 && (
-            <section>
+            <section className="w-full sm:w-1/2">
               <h2 className="text-2xl font-semibold mb-4">Recommendations</h2>
               <ul className="space-y-4">
                 {recommendations.map((track) => (
