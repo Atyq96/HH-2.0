@@ -94,8 +94,9 @@ const MainPage: React.FC = () => {
           Welcome to Harmony Hub
         </h1>
         <p className="text-[18px] text-center w-full sm:text-md ml-2 mr-2">
-          Your Personalized Soundtrack Awaits! Dive into a world of music
-          perfectly curated from your Spotify favorites.
+          {!token
+            ? "Your Personalized Soundtrack Awaits! Dive into a world of music perfectly curated from your Spotify favorites."
+            : "Explore your top tracks and discover new music tailored just for you!"}
         </p>
         {!token ? (
           <button
