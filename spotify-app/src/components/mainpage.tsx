@@ -127,7 +127,12 @@ const MainPage: React.FC = () => {
                       className="w-16 h-16 rounded"
                     />
                   )}
-                  <span className="flex-1">{track.name}</span>
+                  <div className="flex-1">
+                    <span className="block">{track.name}</span>
+                    <span className="text-gray-400 text-sm">
+                      {track.artists.map((artist) => artist.name).join(", ")}
+                    </span>
+                  </div>
                   <a
                     href={track.external_urls.spotify}
                     target="_blank"
@@ -164,7 +169,12 @@ const MainPage: React.FC = () => {
                         className="w-16 h-16 rounded"
                       />
                     )}
-                    <span className="flex-1">{track.name}</span>
+                    <div className="flex-1">
+                      <span className="block">{track.name}</span>
+                      <span className="text-gray-400 text-sm">
+                        {track.artists.map((artist) => artist.name).join(", ")}
+                      </span>
+                    </div>
                     <a
                       href={track.external_urls.spotify}
                       target="_blank"
