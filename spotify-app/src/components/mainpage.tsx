@@ -1,18 +1,22 @@
+// Importing necessary hooks from React and the Spotify Web API library
 import React, { useEffect, useState } from "react";
 import SpotifyWebApi from "spotify-web-api-js";
 
+// Creating an instance of the Spotify Web API
 const spotifyApi = new SpotifyWebApi();
 
 const MainPage: React.FC = () => {
+  // State to store top tracks fetched from Spotify API
   const [topTracks, setTopTracks] = useState<SpotifyApi.TrackObjectFull[]>([]);
-  const [recommendations, setRecommendations] = useState<
-    SpotifyApi.TrackObjectFull[]
-  >([]);
-  const [token, setToken] = useState<string | null>(
-    localStorage.getItem("spotifyAccessToken")
-  );
+  
+  // State to store recommended tracks fetched from Spotify API
+  const [recommendations, setRecommendations] = useState<SpotifyApi.TrackObjectFull[]>([]);
+  
+  // State to store the Spotify access token, initialized from localStorage if available
+  const [token, setToken] = useState<string | null>(localStorage.getItem("spotifyAccessToken"));
 
   useEffect(() => {
+    // Extracting the access token from the URL hash if available
     const hash = window.location.hash
       .substring(1)
       .split("&")
@@ -35,6 +39,7 @@ const MainPage: React.FC = () => {
 
   useEffect(() => {
     if (token) {
+      // Function to fetch the user's top tracks
       const fetchTopTracks = async () => {
         try {
           const response = await spotifyApi.getMyTopTracks({ limit: 5 });
@@ -48,6 +53,7 @@ const MainPage: React.FC = () => {
     }
   }, [token]);
 
+  // Function to fetch track recommendations based on top tracks
   const fetchRecommendations = async () => {
     try {
       const seedTracks = topTracks.map((track) => track.id).slice(0, 5);
@@ -67,6 +73,7 @@ const MainPage: React.FC = () => {
     }
   };
 
+  // Function to handle Spotify login
   const handleLogin = () => {
     const clientId = "f697bc8bf37d4b62aa9c1c2245a97e42"; // Your actual Client ID
     const redirectUri = "https://hh-2-0-fth8.vercel.app/"; // Your local URL or production URL
@@ -80,6 +87,7 @@ const MainPage: React.FC = () => {
     window.location.href = authUrl;
   };
 
+  // Function to handle Spotify logout
   const handleLogout = () => {
     setToken(null);
     localStorage.removeItem("spotifyAccessToken");
@@ -89,7 +97,7 @@ const MainPage: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center sm:p-32 px-10 py-32 justify-center">
-      <div className="flex flex-col gap-5 rounded-lg  justify-center items-center">
+      <div className="flex flex-col gap-5 rounded-lg justify-center items-center">
         <h1 className="font-bold text-[18px] sm:text-[50px] text-center">
           Welcome to Harmony Hub
         </h1>
@@ -98,17 +106,18 @@ const MainPage: React.FC = () => {
             ? "Your Personalized Soundtrack Awaits! Dive into a world of music perfectly curated from your Spotify favorites."
             : "Explore your top tracks and discover new music tailored just for you!"}
         </p>
+        {/* Show login button if no token is present, otherwise show logout button */}
         {!token ? (
           <button
             onClick={handleLogin}
-            className=" bg-green-500 text-white rounded-lg p-2 w-32 "
+            className="bg-green-500 text-white rounded-lg p-2 w-32"
           >
             Get Started
           </button>
         ) : (
           <button
             onClick={handleLogout}
-            className=" bg-red-500 text-white rounded-lg p-2 w-32"
+            className="bg-red-500 text-white rounded-lg p-2 w-32"
           >
             Logout
           </button>
@@ -119,6 +128,7 @@ const MainPage: React.FC = () => {
           <section className="w-full sm:w-1/2 mb-8">
             <h2 className="text-2xl font-semibold mb-4">Top Tracks</h2>
             <ul className="space-y-4">
+              {/* Display user's top tracks */}
               {topTracks.map((track) => (
                 <li key={track.id} className="flex items-center space-x-4">
                   {track.album && track.album.images[0] && (
@@ -161,6 +171,7 @@ const MainPage: React.FC = () => {
             <section className="w-full sm:w-1/2">
               <h2 className="text-2xl font-semibold mb-4">Recommendations</h2>
               <ul className="space-y-4">
+                {/* Display recommended tracks */}
                 {recommendations.map((track) => (
                   <li key={track.id} className="flex items-center space-x-4">
                     {track.album && track.album.images[0] && (
