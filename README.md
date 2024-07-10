@@ -6,7 +6,7 @@ Welcome to **HarmonyHub** – a school project designed to enhance your music di
 
 [🌐 Deployed Site](https://hh-2-0-fth8.vercel.app/)
 
-[📄 Final Project Blog Article](https://medium.com/@username/harmonyhub-final-project-summary-123456)
+[📄 Final Project Blog Article]([https://medium.com/@username/harmonyhub-final-project-summary-123456](https://medium.com/@ayoub3412/harmonyhub-a-journey-of-music-and-code-babbd7c54190))
 
 ### 👥 Authors
 
