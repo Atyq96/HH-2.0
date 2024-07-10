@@ -8,12 +8,7 @@ Final Project Blog Article
 
 Authors
 Amine Atyq
-LinkedIn
-GitHub
-
 Ayoub Abouchadi
-LinkedIn
-GitHub
 
 Installation
 To run this project locally, follow these steps:
@@ -99,7 +94,6 @@ Open a pull request on GitHub and describe your changes in detail.
 Related Projects
 Spotify Web API JS: A client-side JavaScript wrapper for the Spotify Web API.
 React Icons: A library for including popular icons in your React projects.
-Licensing
-This project is licensed under the MIT License. See the LICENSE file for more details.
+
 
 Thank you for using HarmonyHub! We hope you enjoy discovering new music tailored just for you. If you have any questions or feedback, please feel free to reach out to us on LinkedIn or LinkedIn.
