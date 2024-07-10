@@ -108,9 +108,6 @@ We welcome contributions to enhance HarmonyHub. To contribute, please follow the
 - [Spotify Web API JS](https://github.com/JMPerez/spotify-web-api-js): A client-side JavaScript wrapper for the Spotify Web API.
 - [React Icons](https://github.com/react-icons/react-icons): A library for including popular icons in your React projects.
 
-## 📜 Licensing
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
 ---
 
